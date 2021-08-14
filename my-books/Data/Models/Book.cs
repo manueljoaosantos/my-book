@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace my_books.Data.Models
 {
-    public class Book
+       public class Book
     {
         public int Id { get; set; }
         public string Title { get; set; }
