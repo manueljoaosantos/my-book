@@ -22,10 +22,17 @@ namespace my_books.Controllers
         [HttpPost("add-publisher")]
         public IActionResult AddPublisher([FromBody] PublisherVM publisher)
         {
-            var _publishers  = _publishersService.AddPubliser(publisher);
-            //return Ok();
-            //return NoContent();
-            return Created(nameof(AddPublisher), _publishers);
+            try
+            {
+                var _publisher = _publishersService.AddPubliser(publisher);
+                //return Ok();
+                //return NoContent();
+                return Created(nameof(_publisher), _publisher);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("get-publisher-by-id/{id}")]
@@ -53,8 +60,15 @@ namespace my_books.Controllers
         [HttpDelete("delete-publisher-by-id/{id}")]
         public IActionResult DeletePublisherById(int id)
         {
-            _publishersService.DeletePublisher(id);
-            return Ok();
+            try
+            {
+                _publishersService.DeletePublisher(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

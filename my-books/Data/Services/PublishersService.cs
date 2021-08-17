@@ -56,6 +56,10 @@ namespace my_books.Data.Services
                 _context.SaveChanges();
 
             }
+            else
+            {
+                throw new Exception($"O publicador com o id: {id} não existe no sistema!");
+            }
         }
     }
 }
