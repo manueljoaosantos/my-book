@@ -1,8 +1,10 @@
 ﻿using my_books.Data.Models;
 using my_books.Data.Models.ViewModel;
+using my_books.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace my_books.Data.Services
@@ -19,6 +21,9 @@ namespace my_books.Data.Services
         //public async Task<Publisher> AddPubliser(PublisherVM publisher)
         public Publisher AddPubliser(PublisherVM publisher)
         {
+            if(StringStartWithNumber(publisher.Name)) throw new PublisherNameException("Nome começa por um numero!!",
+                    publisher.Name);
+
             var _publisher = new Publisher()
             {
                 Name = publisher.Name
@@ -60,6 +65,15 @@ namespace my_books.Data.Services
             {
                 throw new Exception($"O publicador com o id: {id} não existe no sistema!");
             }
+
         }
+
+        //private bool StringStartWithNumber(string name)
+        //{
+        //    if (Regex.IsMatch(name, @"^\d")) return true;
+        //    return false;
+        //}
+        private bool StringStartWithNumber(string name) => (Regex.IsMatch(name, @"^\d"));
+            
     }
 }
