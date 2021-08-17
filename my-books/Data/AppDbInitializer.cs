@@ -26,7 +26,7 @@ namespace my_books.Data
                         DateRead = DateTime.Now.AddDays(-10),
                         Rate = 4,
                         Genre = "Biography",
-                        Author = "Manuel Santos",
+                        //Author = "Manuel Santos",
                         CoverUrl = "https://5e94651f45f5e.site123.me/",
                         DateAdded = DateTime.Now
                     },
@@ -36,7 +36,7 @@ namespace my_books.Data
                         Description = "2nd Book Description",
                         IsRead = false,
                         Genre = "Biography",
-                        Author = "Manuel Santos",
+                        //Author = "Manuel Santos",
                         CoverUrl = "https://5e94651f45f5e.site123.me/",
                         DateAdded = DateTime.Now
                     });
