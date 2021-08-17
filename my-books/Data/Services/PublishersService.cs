@@ -16,7 +16,8 @@ namespace my_books.Data.Services
         }
 
         //Task<ActionResult<Book>> CreateBook([FromBody] Book book)
-        public async void Task<AddPubliser>(PublisherVM publisher)
+        //public async Task<Publisher> AddPubliser(PublisherVM publisher)
+        public Publisher AddPubliser(PublisherVM publisher)
         {
             var _publisher = new Publisher()
             {
@@ -25,7 +26,11 @@ namespace my_books.Data.Services
             _context.Publishers.Add(_publisher);
             _context.SaveChanges();
             //await _context.SaveChangesAsync();
+            return _publisher;
         }
+
+        public Publisher GetPubliserById(int id) => _context.Publishers.FirstOrDefault(n => n.Id == id);
+
         public PublisherWithBooksAndAuthorsVM GetPublisherData(int publisherId)
         {
             var _publisherData = _context.Publishers.Where(n => n.Id == publisherId)
