@@ -42,34 +42,34 @@ namespace my_books.Controllers
         }
 
         [HttpGet("get-publisher-by-id/{id}")]
-        //public IActionResult GetPublisheById(int id)
-        //{
-        //    //throw new Exception("Esta é uma excepção do Handler do middleware");
-        //    var _response = _publishersService.GetPubliserById(id);
-        //    if(_response != null)
-        //    {
-        //        return Ok(_response);
-        //    }
-        //    else
-        //    {
-        //        return NotFound();
-        //    }
-        //    //return Ok(_response);
-        //}
-        public Publisher GetPublisheById(int id)
+        public IActionResult GetPublisheById(int id)
         {
             //throw new Exception("Esta é uma excepção do Handler do middleware");
             var _response = _publishersService.GetPubliserById(id);
             if (_response != null)
             {
-                return _response;
+                return Ok(_response);
             }
             else
             {
-                return null;
+                return NotFound();
             }
             //return Ok(_response);
         }
+        //public Publisher GetPublisheById(int id)
+        //{
+        //    //throw new Exception("Esta é uma excepção do Handler do middleware");
+        //    var _response = _publishersService.GetPubliserById(id);
+        //    if (_response != null)
+        //    {
+        //        return _response;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //    //return Ok(_response);
+        //}
         [HttpGet("get-publisher-books-with-authors/{id}")]
         public IActionResult GetPublisherData(int id)
         {
