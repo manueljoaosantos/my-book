@@ -19,3 +19,5 @@ System.Exception: Este é o log de GetAllPublishers()
    at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
    at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
 08/20/2021 18:50:50 +01:00 [Error] - Message: {"StatusCode":500,"Message":"Este é o log de GetAllPublishers()","Path":"/api/publishers/get-all-publishers"}
+08/20/2021 19:01:59 +01:00 [Information] - Message: Este é o log no método GetAllPublishers()
+08/20/2021 19:03:20 +01:00 [Information] - Message: Este é o log no método GetAllPublishers()
