@@ -33,6 +33,7 @@ namespace my_books.Data.Services
                 }
             }
 
+
             if(!string.IsNullOrEmpty(searchString))
             {
                 allPublishers = allPublishers.Where(n => n.Name.Contains(searchString,

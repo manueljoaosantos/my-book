@@ -11,10 +11,11 @@ namespace my_books.Controllers.v2
     [ApiController]
     public class TestController : ControllerBase
     {
+        [ApiVersion("2.0")]
         [HttpGet("get-test-data")]
         public IActionResult Get()
         {
-            return Ok("Este é o teste contoller v1");
+            return Ok("Este é o teste contoller v2");
         }
     }
 }
