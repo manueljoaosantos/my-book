@@ -8,15 +8,30 @@ using System.Threading.Tasks;
 namespace my_books.Controllers.v1
 {
     [ApiVersion("1.0")]
-    //[Route("api/[controller]")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.2")]
+    [ApiVersion("1.9")]
+    [Route("api/[controller]")]
+    //[Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class TestController : ControllerBase
     {
         [HttpGet("get-test-data")]
-        public IActionResult Get()
+        public IActionResult Get_V1()
         {
-            return Ok("Este é o teste contoller v1");
+            return Ok("Este é o teste controller v1");
         }
+
+        [HttpGet("get-test-data"), MapToApiVersion("1.2")]
+        public IActionResult Get_V12()
+        {
+            return Ok("Este é o teste controller version v1.2");
+        }
+
+        [HttpGet("get-test-data"), MapToApiVersion("1.9")]
+        public IActionResult Get_V19()
+        {
+            return Ok("Este é o teste controller version v1.9");
+        }
+
     }
 }
