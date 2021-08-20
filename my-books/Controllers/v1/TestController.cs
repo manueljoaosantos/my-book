@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace my_books.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    //[Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class TestController : ControllerBase
     {
-        [ApiVersion("1.0")]
         [HttpGet("get-test-data")]
         public IActionResult Get()
         {
