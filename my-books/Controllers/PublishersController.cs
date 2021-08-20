@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using my_books.ActionResults;
 using my_books.Data.Models;
 using my_books.Data.Models.ViewModel;
 using my_books.Data.Services;
@@ -56,17 +57,27 @@ namespace my_books.Controllers
         //    }
         //    //return Ok(_response);
         //}
-        public ActionResult<Publisher> GetPublisheById(int id)
+        public CustomActionResult GetPublisheById(int id)
         {
             //throw new Exception("Esta é uma excepção do Handler do middleware");
             var _response = _publishersService.GetPubliserById(id);
             if (_response != null)
             {
-                return _response;
+                var _resposeObj = new CustomActionResultVM()
+                {
+                    Publisher = _response
+                };
+
+                return new CustomActionResult(_resposeObj);
             }
             else
             {
-                return NotFound();
+                var _resposeObj = new CustomActionResultVM()
+                {
+                    Exception = new Exception("Esta excenption vem do método get-publisher-by-id/{id}")
+                };
+
+                return new CustomActionResult(_resposeObj);
             }
             //return Ok(_response);
         }
