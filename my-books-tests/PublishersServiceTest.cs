@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using my_books.Data;
 using my_books.Data.Models;
+using my_books.Data.Services;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace my_books_tests
 {
@@ -13,6 +15,7 @@ namespace my_books_tests
             .UseInMemoryDatabase(databaseName: "BookBbTest")
             .Options;
         AppDbContext context;
+        PublishersService publishersService;
 
         [OneTimeSetUp]
         public void Setup()
@@ -21,6 +24,44 @@ namespace my_books_tests
             context.Database.EnsureCreated();
 
             SeedDatabase();
+            publishersService = new PublishersService(context);
+        }
+
+        [Test, Order(1)]
+        public void GetAllPublishers_WitNoSortBy_WithNoSearchString_WithNoPageNumber()
+        {
+            var result = publishersService.GetAllPublishers("", "", null);
+
+            Assert.That(result.Count, Is.EqualTo(5));
+            Assert.AreEqual(result.Count, 5);
+        }
+
+        [Test, Order(2)]
+        public void GetAllPublishers_WitNoSortBy_WithNoSearchString_WithPageNumber()
+        {
+            var result = publishersService.GetAllPublishers("", "", 2);
+
+            Assert.That(result.Count, Is.EqualTo(2));
+        }
+
+        [Test, Order(3)]
+        public void GetAllPublishers_WitNoSortBy_WithSearchString_WithPageNumber()
+        {
+            var result = publishersService.GetAllPublishers("", "3", null);
+
+            Assert.That(result.Count, Is.EqualTo(1));
+            Assert.That(result.FirstOrDefault().Name, Is.EqualTo("Publicador 3"));
+
+        }
+
+        [Test, Order(4)]
+        public void GetAllPublishers_WitSortBy_WithNoSearchString_WithPageNumber()
+        {
+            var result = publishersService.GetAllPublishers("name_desc", "", null);
+
+            Assert.That(result.Count, Is.EqualTo(5));
+            Assert.That(result.FirstOrDefault().Name, Is.EqualTo("Publicador 7"));
+
         }
 
         private void SeedDatabase()
@@ -29,28 +70,32 @@ namespace my_books_tests
             {
                     new Publisher() {
                         Id = 1,
-                        Name = "Publisher 1"
+                        Name = "Publicador 1"
                     },
                     new Publisher() {
                         Id = 2,
-                        Name = "Publisher 2"
+                        Name = "Publicador 2"
                     },
                     new Publisher() {
                         Id = 3,
-                        Name = "Publisher 3"
+                        Name = "Publicador 3"
                     },
                     new Publisher() {
                         Id = 4,
-                        Name = "Publisher 4"
+                        Name = "Publicador 4"
                     },
                     new Publisher() {
                         Id = 5,
-                        Name = "Publisher 5"
+                        Name = "Publicador 5"
                     },
                     new Publisher() {
                         Id = 6,
-                        Name = "Publisher 6"
+                        Name = "Publicador 6"
                     },
+                    new Publisher() {
+                        Id = 7,
+                        Name = "Publicador 7"
+                    }
             };
             context.Publishers.AddRange(publishers);
 
@@ -100,7 +145,7 @@ namespace my_books_tests
                 },
                 new Book()
                 {
-                    Id = 1,
+                    Id = 3,
                     Title = "Livro com titulo 3",
                     Description = "Livro 3 com descrição",
                     IsRead = false,
@@ -141,7 +186,7 @@ namespace my_books_tests
             context.SaveChanges();
         }
 
-    [OneTimeTearDown]
+        [OneTimeTearDown]
         public void ClearUp()
         {
             context.Database.EnsureDeleted();
