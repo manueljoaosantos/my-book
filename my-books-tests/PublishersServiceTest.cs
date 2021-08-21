@@ -64,6 +64,15 @@ namespace my_books_tests
 
         }
 
+        [Test, Order(4)]
+        public void GetPubliserById()
+        {
+            var result = publishersService.GetPubliserById(3);
+
+            Assert.That(result.Id, Is.EqualTo(3));
+
+        }
+
         private void SeedDatabase()
         {
             var publishers = new List<Publisher>
