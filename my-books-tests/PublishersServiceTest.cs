@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using my_books.Data;
 using my_books.Data.Models;
+using my_books.Data.Models.ViewModel;
 using my_books.Data.Services;
+using my_books.Exceptions;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -64,15 +66,40 @@ namespace my_books_tests
 
         }
 
-        [Test, Order(4)]
-        public void GetPubliserById()
+        [Test, Order(5)]
+        public void GetPubliserById_WithRespose_Test()
         {
             var result = publishersService.GetPubliserById(3);
 
             Assert.That(result.Id, Is.EqualTo(3));
+            Assert.That(result.Name, Is.EqualTo("Publicador 3"));
+        }
+
+        [Test, Order(6)]
+        public void AddPubliser_WithException_Test()
+        {
+            var newPublisher = new PublisherVM()
+            {
+                Name = "123 Novo Publicador com Exception"
+            };
+            Assert.That(() => publishersService.AddPubliser(newPublisher),
+                Throws.Exception.TypeOf<PublisherNameException>().With.Message.EqualTo("Nome começa por um numero!!"));
 
         }
 
+        [Test, Order(7)]
+        public void AddPubliser_WithoutException_Test()
+        {
+            var newPublisher = new PublisherVM()
+            {
+                Name = "Novo Publicador com Exception"
+            };
+            var result = publishersService.AddPubliser(newPublisher);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Does.StartWith("Novo"));
+            Assert.That(result.Id, Is.Not.Null);
+
+        }
         private void SeedDatabase()
         {
             var publishers = new List<Publisher>
