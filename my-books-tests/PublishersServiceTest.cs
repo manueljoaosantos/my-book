@@ -100,6 +100,19 @@ namespace my_books_tests
             Assert.That(result.Id, Is.Not.Null);
 
         }
+
+        [Test, Order(7)]
+        public void GetPublisherData_Test()
+        {
+            var result = publishersService.GetPublisherData(1);
+            Assert.That(result.Name, Is.EqualTo("Publicador 1"));
+            Assert.That(result.BookAuthors, Is.Not.Empty);
+            Assert.That(result.BookAuthors.Count, Is.GreaterThan(0));
+            Assert.That(result.BookAuthors.OrderBy(n => n.BookName).FirstOrDefault().BookName, 
+                Is.EqualTo("Livro com titulo 1"));
+        }
+
+            
         private void SeedDatabase()
         {
             var publishers = new List<Publisher>
