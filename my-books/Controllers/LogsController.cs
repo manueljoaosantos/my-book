@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using my_books.Data.Services;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ namespace my_books.Controllers
     public class LogsController : ControllerBase
     {
         private LogsService _logsService;
-        public LogsController(LogsService logsService)
+        private readonly ILogger<LogsController> _logger;
+        public LogsController(LogsService logsService, ILogger<LogsController> logger)
         {
             _logsService = logsService;
+            _logger = logger;
         }
 
         [HttpGet("get-all-logs-from-db")]

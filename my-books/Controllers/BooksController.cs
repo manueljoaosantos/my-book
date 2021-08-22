@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using my_books.Data.Models;
 using my_books.Data.Models.ViewModel;
 using my_books.Data.Services;
@@ -17,10 +18,12 @@ namespace my_books.Controllers
     {
 
         public BooksService _booksService;
+        private readonly ILogger<BooksController> _logger;
 
-        public BooksController(BooksService booksService)
+        public BooksController(BooksService booksService, ILogger<BooksController> logger)
         {
             _booksService = booksService;
+            _logger = logger;
         }
 
         [HttpGet("get-all-books")]

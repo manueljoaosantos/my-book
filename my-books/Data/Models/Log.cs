@@ -15,6 +15,6 @@ namespace my_books.Data.Models
         public DateTime TimeStamp { get; set; }
         public string Exception { get; set; }
         public string Properties { get; set; } //XML Propriedades
-        public string LogeLevel { get; set; }
+        public string LogLevel { get; set; }
     }
 }

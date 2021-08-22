@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using my_books.Data.Models.ViewModel;
 using my_books.Data.Services;
 using System;
@@ -14,9 +15,11 @@ namespace my_books.Controllers
     public class AuthorsController : ControllerBase
     {
         public AuthorsService _authorsService;
-        public AuthorsController(AuthorsService authorsService)
+        private readonly ILogger<AuthorsController> _logger;
+        public AuthorsController(AuthorsService authorsService, ILogger<AuthorsController> logger)
         {
             _authorsService = authorsService;
+            _logger = logger;
         }
 
         [HttpPost("add-author")]

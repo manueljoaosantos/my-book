@@ -18,7 +18,7 @@ namespace my_books_tests
     public class PublishersControllerTests
     {
         private static DbContextOptions<AppDbContext> dbContextOptions = new DbContextOptionsBuilder<AppDbContext>()
-            .UseInMemoryDatabase(databaseName: "BookControllerTest")
+            .UseInMemoryDatabase(databaseName: "PublishersControllerTest")
             .Options;
 
         AppDbContext context;
