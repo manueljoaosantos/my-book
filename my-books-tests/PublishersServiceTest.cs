@@ -30,7 +30,7 @@ namespace my_books_tests
         }
 
         [Test, Order(1)]
-        public void GetAllPublishers_WitNoSortBy_WithNoSearchString_WithNoPageNumber()
+        public void GetAllPublishers_WitNoSortBy_WithNoSearchString_WithNoPageNumber_Test()
         {
             var result = publishersService.GetAllPublishers("", "", null);
 
@@ -39,7 +39,7 @@ namespace my_books_tests
         }
 
         [Test, Order(2)]
-        public void GetAllPublishers_WitNoSortBy_WithNoSearchString_WithPageNumber()
+        public void GetAllPublishers_WitNoSortBy_WithNoSearchString_WithPageNumber_Test()
         {
             var result = publishersService.GetAllPublishers("", "", 2);
 
@@ -47,7 +47,7 @@ namespace my_books_tests
         }
 
         [Test, Order(3)]
-        public void GetAllPublishers_WitNoSortBy_WithSearchString_WithPageNumber()
+        public void GetAllPublishers_WitNoSortBy_WithSearchString_WithPageNumber_Test()
         {
             var result = publishersService.GetAllPublishers("", "3", null);
 
@@ -57,7 +57,7 @@ namespace my_books_tests
         }
 
         [Test, Order(4)]
-        public void GetAllPublishers_WitSortBy_WithNoSearchString_WithPageNumber()
+        public void GetAllPublishers_WitSortBy_WithNoSearchString_WithPageNumber_Test()
         {
             var result = publishersService.GetAllPublishers("name_desc", "", null);
 
